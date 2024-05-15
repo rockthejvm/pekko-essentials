@@ -6,7 +6,9 @@ import org.apache.pekko.actor.typed.{ActorRef, Behavior}
 import org.scalatest.wordspec.AnyWordSpecLike
 import scala.concurrent.duration._
 
-class EssentialTestingSpec extends ScalaTestWithActorTestKit with AnyWordSpecLike {
+class EssentialTestingSpec
+    extends ScalaTestWithActorTestKit
+    with AnyWordSpecLike {
 
   import EssentialTestingSpec._
 
@@ -48,7 +50,7 @@ class EssentialTestingSpec extends ScalaTestWithActorTestKit with AnyWordSpecLik
       val receivedMessage = probe.expectMessageType[SimpleReply]
       // other assertions
       assert(receivedMessage.contents == receivedMessage.contents.toUpperCase()) // Scala standard assertion
-      receivedMessage.contents should be("AKKA") // ScalaTest library assertion
+      receivedMessage.contents should be("PEKKO") // ScalaTest library assertion
     }
 
     "reply with favorite tech as multiple messages" in {
@@ -60,7 +62,7 @@ class EssentialTestingSpec extends ScalaTestWithActorTestKit with AnyWordSpecLik
       }
 
       // assertion
-      repliesContents should contain allOf("Scala", "Pekko")
+      repliesContents should contain allOf ("Scala", "Pekko")
     }
   }
 }
@@ -68,9 +70,12 @@ class EssentialTestingSpec extends ScalaTestWithActorTestKit with AnyWordSpecLik
 object EssentialTestingSpec {
   // code under test
   trait SimpleProtocol
-  case class SimpleMessage(message: String, sender: ActorRef[SimpleProtocol]) extends SimpleProtocol
-  case class UppercaseString(message: String, replyTo: ActorRef[SimpleProtocol]) extends SimpleProtocol
-  case class FavoriteTech(replyTo: ActorRef[SimpleProtocol]) extends SimpleProtocol
+  case class SimpleMessage(message: String, sender: ActorRef[SimpleProtocol])
+      extends SimpleProtocol
+  case class UppercaseString(message: String, replyTo: ActorRef[SimpleProtocol])
+      extends SimpleProtocol
+  case class FavoriteTech(replyTo: ActorRef[SimpleProtocol])
+      extends SimpleProtocol
   case class SimpleReply(contents: String) extends SimpleProtocol
 
   object SimpleActor {

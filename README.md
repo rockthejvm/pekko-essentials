@@ -1,4 +1,4 @@
-# The official repository for the Rock the JVM Akka Typed Essentials course
+# The official repository for the Rock the JVM Pekko Typed Essentials course
 
 **For the Akka version, go [here](https://github.com/rockthejvm/akka-essentials).**
 

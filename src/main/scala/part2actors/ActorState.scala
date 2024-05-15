@@ -27,7 +27,7 @@ object ActorState {
   trait SimpleThing
   case object EatChocolate extends SimpleThing
   case object CleanUpTheFloor extends SimpleThing
-  case object LearnAkka extends SimpleThing
+  case object LearnPekko extends SimpleThing
   /*
     Message types must be IMMUTABLE and SERIALIZABLE.
     - use case classes/objects
@@ -47,8 +47,8 @@ object ActorState {
           context.log.info(s"[$happiness] Wiping the floor, ugh...")
           happiness -= 2
           Behaviors.same
-        case LearnAkka =>
-          context.log.info(s"[$happiness] Learning Akka, YAY!")
+        case LearnPekko =>
+          context.log.info(s"[$happiness] Learning Pekko, YAY!")
           happiness += 99
           Behaviors.same
       }
@@ -58,7 +58,7 @@ object ActorState {
   def demoSimpleHuman(): Unit = {
     val human = ActorSystem(SimpleHuman_V2(), "DemoSimpleHuman")
 
-    human ! LearnAkka
+    human ! LearnPekko
     human ! EatChocolate
     (1 to 30).foreach(_ => human ! CleanUpTheFloor)
 
@@ -77,8 +77,8 @@ object ActorState {
         case CleanUpTheFloor =>
           context.log.info(s"[$happiness] Wiping the floor, ugh...")
           statelessHuman(happiness - 2)
-        case LearnAkka =>
-          context.log.info(s"[$happiness] Learning Akka, YAY!")
+        case LearnPekko =>
+          context.log.info(s"[$happiness] Learning Pekko, YAY!")
           statelessHuman(happiness + 99)
       }
     }
@@ -108,7 +108,7 @@ object ActorState {
   def demoWordCounter(): Unit = {
     val wordCounter = ActorSystem(WordCounter_V2(), "WordCounterDemo")
 
-    wordCounter ! "I am learning Akka"
+    wordCounter ! "I am learning Pekko"
     wordCounter ! "I hope you will be stateless one day"
     wordCounter ! "Let's see the next one"
 

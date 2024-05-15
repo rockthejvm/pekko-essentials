@@ -19,10 +19,10 @@ class EssentialTestingSpec extends ScalaTestWithActorTestKit with AnyWordSpecLik
       val probe = testKit.createTestProbe[SimpleProtocol]() // "inspector"
 
       // scenario
-      simpleActor ! SimpleMessage("Akka", probe.ref)
+      simpleActor ! SimpleMessage("Pekko", probe.ref)
 
       // assertions
-      probe.expectMessage(SimpleReply("AkkaAkka"))
+      probe.expectMessage(SimpleReply("PekkoPekko"))
     }
   }
 
@@ -31,7 +31,7 @@ class EssentialTestingSpec extends ScalaTestWithActorTestKit with AnyWordSpecLik
       val blackHole = testKit.spawn(BlackHole(), "blackHole")
       val probe = testKit.createTestProbe[SimpleProtocol]()
 
-      blackHole ! SimpleMessage("I love Akka", probe.ref)
+      blackHole ! SimpleMessage("I love Pekko", probe.ref)
       blackHole ! SimpleMessage("Hey can you hear me?", probe.ref)
       blackHole ! SimpleMessage("I'm TALKING TO YOU!", probe.ref)
 
@@ -44,7 +44,7 @@ class EssentialTestingSpec extends ScalaTestWithActorTestKit with AnyWordSpecLik
     val probe = testKit.createTestProbe[SimpleProtocol]()
 
     "uppercase a string" in {
-      simpleActor ! UppercaseString("Akka", probe.ref)
+      simpleActor ! UppercaseString("Pekko", probe.ref)
       val receivedMessage = probe.expectMessageType[SimpleReply]
       // other assertions
       assert(receivedMessage.contents == receivedMessage.contents.toUpperCase()) // Scala standard assertion
@@ -60,7 +60,7 @@ class EssentialTestingSpec extends ScalaTestWithActorTestKit with AnyWordSpecLik
       }
 
       // assertion
-      repliesContents should contain allOf("Scala", "Akka")
+      repliesContents should contain allOf("Scala", "Pekko")
     }
   }
 }
@@ -83,7 +83,7 @@ object EssentialTestingSpec {
         Behaviors.same
       case FavoriteTech(replyTo) =>
         replyTo ! SimpleReply("Scala")
-        replyTo ! SimpleReply("Akka")
+        replyTo ! SimpleReply("Pekko")
         Behaviors.same
     }
   }

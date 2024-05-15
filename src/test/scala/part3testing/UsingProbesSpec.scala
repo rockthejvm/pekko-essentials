@@ -27,7 +27,7 @@ class UsingProbesSpec extends ScalaTestWithActorTestKit with AnyWordSpecLike {
       master ! Register(workerProbe.ref, externalProbe.ref)
       externalProbe.expectMessage(RegisterAck)
 
-      val taskString = "I love Akka"
+      val taskString = "I love Pekko"
       master ! Work(taskString, externalProbe.ref)
 
       workerProbe.expectMessage(WorkerTask(taskString, master.ref, externalProbe.ref))
@@ -52,7 +52,7 @@ class UsingProbesSpec extends ScalaTestWithActorTestKit with AnyWordSpecLike {
       master ! Register(mockedWorker, externalProbe.ref)
       externalProbe.expectMessage(RegisterAck)
 
-      val taskString = "I love Akka"
+      val taskString = "I love Pekko"
       master ! Work(taskString, externalProbe.ref)
       master ! Work(taskString, externalProbe.ref)
 

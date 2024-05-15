@@ -26,7 +26,7 @@ object Supervision {
     val guardian: Behavior[Unit] = Behaviors.setup { context =>
       val fussyCounter = context.spawn(FussyWordCounter(), "fussyCounter")
 
-      fussyCounter ! "Starting to understand this Akka business..."
+      fussyCounter ! "Starting to understand this Pekko business..."
       fussyCounter ! "Quick! Hide!"
       fussyCounter ! "Are you there?"
 
@@ -57,7 +57,7 @@ object Supervision {
     val guardian: Behavior[Unit] = Behaviors.setup { context =>
       val fussyCounter = context.spawn(parentBehavior, "fussyCounter")
 
-      fussyCounter ! "Starting to understand this Akka business..."
+      fussyCounter ! "Starting to understand this Pekko business..."
       fussyCounter ! "Quick! Hide!"
       fussyCounter ! "Are you there?"
 
@@ -94,7 +94,7 @@ object Supervision {
     val guardian: Behavior[Unit] = Behaviors.setup { context =>
       val fussyCounter = context.spawn(parentBehavior, "fussyCounter")
 
-      fussyCounter ! "Starting to understand this Akka business..."
+      fussyCounter ! "Starting to understand this Pekko business..."
       fussyCounter ! "Quick! Hide!"
       fussyCounter ! "Are you there?"
       fussyCounter ! "What are you doing?"

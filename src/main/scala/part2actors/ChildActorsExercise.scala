@@ -126,7 +126,7 @@ object ChildActorsExercise {
       val wcm = context.spawn(WordCounterMaster(), "master")
 
       wcm ! Initialize(3)
-      wcm ! WordCountTask("I love Akka", aggregator)
+      wcm ! WordCountTask("I love Pekko", aggregator)
       wcm ! WordCountTask("Scala is super dope", aggregator)
       wcm ! WordCountTask("yes it is", aggregator)
       wcm ! WordCountTask("Testing round robin scheduling", aggregator)

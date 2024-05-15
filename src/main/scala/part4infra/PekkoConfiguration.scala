@@ -4,7 +4,7 @@ import org.apache.pekko.actor.typed.{ActorSystem, Behavior}
 import org.apache.pekko.actor.typed.scaladsl.Behaviors
 import com.typesafe.config.ConfigFactory
 
-object AkkaConfiguration {
+object PekkoConfiguration {
 
   object SimpleLoggingActor {
     def apply(): Behavior[String] = Behaviors.receive { (context, message) =>
@@ -52,12 +52,12 @@ object AkkaConfiguration {
   def demoOtherFileFormats(): Unit = {
     val jsonConfig = ConfigFactory.load("json/jsonConfiguration.json")
     println(s"json config with custom property: ${jsonConfig.getString("aJsonProperty")}")
-    println(s"json config with Akka property: ${jsonConfig.getString("pekko.loglevel")}")
+    println(s"json config with Pekko property: ${jsonConfig.getString("pekko.loglevel")}")
 
     // properties format
     val propsConfig = ConfigFactory.load("properties/propsConfiguration.properties")
     println(s"properties config with custom property: ${propsConfig.getString("mySimpleProperty")}")
-    println(s"properties config with Akka property: ${propsConfig.getString("pekko.loglevel")}")
+    println(s"properties config with Pekko property: ${propsConfig.getString("pekko.loglevel")}")
   }
 
   def main(args: Array[String]): Unit = {

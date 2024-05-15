@@ -19,7 +19,7 @@ object ActorsIntro {
     val actorSystem = ActorSystem(Person.happy(), "FirstActorSystem")
 
     // part 3: communicate!
-    actorSystem ! "I am learning Akka" // asynchronously send a message
+    actorSystem ! "I am learning Pekko" // asynchronously send a message
     // ! = the "tell" method
 
     // part 4: gracefully shut down
@@ -68,8 +68,8 @@ object ActorsIntro {
    *  Test both.
    *
    * 2. Change the actor behavior:
-   *  - the happy behavior will turn to sad() if it receives "Akka is bad."
-   *  - the sad behavior will turn to happy() if it receives "Akka is awesome!"
+   *  - the happy behavior will turn to sad() if it receives "Pekko is bad."
+   *  - the sad behavior will turn to happy() if it receives "Pekko is awesome!"
    *
    * 3. Inspect my code and try to make it better.
    */
@@ -77,8 +77,8 @@ object ActorsIntro {
   object Person {
     def happy(): Behavior[String] = Behaviors.receive { (context, message) =>
       message match {
-        case "Akka is bad." =>
-          context.log.info("Don't you say anything bad about Akka!!!")
+        case "Pekko is bad." =>
+          context.log.info("Don't you say anything bad about Pekko!!!")
           sad()
         case _ =>
           context.log.info(s"I've received '$message'.That's great!")
@@ -88,7 +88,7 @@ object ActorsIntro {
 
     def sad(): Behavior[String] = Behaviors.receive { (context, message) =>
       message match {
-        case "Akka is awesome!" =>
+        case "Pekko is awesome!" =>
           context.log.info("Happy now!")
           happy()
         case _ =>
@@ -104,10 +104,10 @@ object ActorsIntro {
     val person = ActorSystem(Person(), "PersonTest")
 
     person ! "I love the color blue."
-    person ! "Akka is bad."
+    person ! "Pekko is bad."
     person ! "I also love the color red."
-    person ! "Akka is awesome!"
-    person ! "I love Akka."
+    person ! "Pekko is awesome!"
+    person ! "I love Pekko."
 
     Thread.sleep(1000)
     person.terminate()
@@ -150,7 +150,7 @@ object ActorsIntro {
     import BetterActor._
     val weirdActor = ActorSystem(BetterActor(), "WeirdActorDemo")
     weirdActor ! IntMessage(43) // ok
-    weirdActor ! StringMessage("Akka") // ok
+    weirdActor ! StringMessage("Pekko") // ok
     // weirdActor ! '\t' // not ok
 
     Thread.sleep(1000)

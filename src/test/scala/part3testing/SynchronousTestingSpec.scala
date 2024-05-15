@@ -29,7 +29,7 @@ class SynchronousTestingSpec extends ScalaTestWithActorTestKit with AnyWordSpecL
 
       val mailbox = TestInbox[UserProtocol]() // the "requester"'s inbox
       // start processing
-      master.run(WordCountTask("Akka testing is pretty powerful!", mailbox.ref))
+      master.run(WordCountTask("Pekko testing is pretty powerful!", mailbox.ref))
       // mock the reply from the child
       master.run(WordCountReply(0, 5))
       // test that the requester got the right message

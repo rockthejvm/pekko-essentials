@@ -9,7 +9,7 @@ class InterceptingLogsSpec extends ScalaTestWithActorTestKit with AnyWordSpecLik
 
   import InterceptingLogsSpec._
 
-  val item = "Rock the JVM Akka course"
+  val item = "Rock the JVM Pekko course"
   val creditCard = "1234-1234-1234-1234" // valid card
   val invalidCard = "0000-0000-0000-0000"
 

@@ -13,7 +13,7 @@ object ChildActors {
     - actors can be identified via a path: /user/parent/child/grandChild/
     - ActorSystem creates
       - the top-level (root) guardian, with children
-        - system guardian (for Akka internal messages)
+        - system guardian (for Pekko internal messages)
         - user guardian (for our custom actors)
     - ALL OUR ACTORS are child actors of the user guardian
    */
@@ -148,7 +148,7 @@ object ChildActors {
       parent ! CreateChild("bob")
       parent ! WatchChild("alice")
       parent ! TellChild("alice", "living next door to you")
-      parent ! TellChild("daniel", "I hope your Akka skills are good")
+      parent ! TellChild("daniel", "I hope your Pekko skills are good")
       parent ! StopChild("alice")
       parent ! TellChild("alice", "hey Alice, you still there?")
 

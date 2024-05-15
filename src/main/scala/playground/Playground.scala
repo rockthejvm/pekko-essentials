@@ -16,7 +16,7 @@ object Playground {
       },
       "DummySystem")
 
-    root ! "Hey, Akka!"
+    root ! "Hey, Pekko!"
 
     implicit val ec: ExecutionContext = root.executionContext
     root.scheduler.scheduleOnce(3.seconds, () => root.terminate())

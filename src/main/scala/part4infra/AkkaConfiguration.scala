@@ -18,7 +18,7 @@ object AkkaConfiguration {
     // HOCON, superset of JSON, managed by Lightbend
     val configString: String =
       """
-        |akka {
+        |pekko {
         |  loglevel = "DEBUG"
         |}
         |""".stripMargin
@@ -45,19 +45,19 @@ object AkkaConfiguration {
   // 3 - a different config in another file
   def demoSeparateConfigFile(): Unit = {
     val separateConfig = ConfigFactory.load("secretDir/secretConfiguration.conf")
-    println(separateConfig.getString("akka.loglevel"))
+    println(separateConfig.getString("pekko.loglevel"))
   }
 
   // 4 - different file formats (JSON, properties)
   def demoOtherFileFormats(): Unit = {
     val jsonConfig = ConfigFactory.load("json/jsonConfiguration.json")
     println(s"json config with custom property: ${jsonConfig.getString("aJsonProperty")}")
-    println(s"json config with Akka property: ${jsonConfig.getString("akka.loglevel")}")
+    println(s"json config with Akka property: ${jsonConfig.getString("pekko.loglevel")}")
 
     // properties format
     val propsConfig = ConfigFactory.load("properties/propsConfiguration.properties")
     println(s"properties config with custom property: ${propsConfig.getString("mySimpleProperty")}")
-    println(s"properties config with Akka property: ${propsConfig.getString("akka.loglevel")}")
+    println(s"properties config with Akka property: ${propsConfig.getString("pekko.loglevel")}")
   }
 
   def main(args: Array[String]): Unit = {

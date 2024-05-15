@@ -10,7 +10,9 @@ object RoutersDemo {
 
   def demoPoolRouter(): Unit = {
     val workerBehavior = LoggerActor[String]()
-    val poolRouter = Routers.pool(5)(workerBehavior).withBroadcastPredicate(_.length > 11) // round robin
+    val poolRouter = Routers
+      .pool(5)(workerBehavior)
+      .withBroadcastPredicate(_.length > 11) // round robin
 
     val userGuardian = Behaviors.setup[Unit] { context =>
       val poolActor = context.spawn(poolRouter, "pool")
@@ -25,15 +27,21 @@ object RoutersDemo {
 
   def demoGroupRouter(): Unit = {
     val serviceKey = ServiceKey[String]("logWorker")
-    // service keys are used by a core akka module for discovering actors and fetching their Refs
+    // service keys are used by a core Pekko module for discovering actors and fetching their Refs
 
     val userGuardian = Behaviors.setup[Unit] { context =>
       // in real life the workers may be created elsewhere in your code
-      val workers = (1 to 5).map(i => context.spawn(LoggerActor[String](), s"worker$i"))
+      val workers =
+        (1 to 5).map(i => context.spawn(LoggerActor[String](), s"worker$i"))
       // register the workers with the service key
-      workers.foreach(worker => context.system.receptionist ! Receptionist.Register(serviceKey, worker))
+      workers.foreach(
+        worker =>
+          context.system.receptionist ! Receptionist
+            .Register(serviceKey, worker)
+      )
 
-      val groupBehavior: Behavior[String] = Routers.group(serviceKey).withRoundRobinRouting() // random by default
+      val groupBehavior: Behavior[String] =
+        Routers.group(serviceKey).withRoundRobinRouting() // random by default
       val groupRouter = context.spawn(groupBehavior, "workerGroup")
 
       (1 to 10).foreach(i => groupRouter ! s"work task $i")
@@ -41,7 +49,10 @@ object RoutersDemo {
       // add new workers later
       Thread.sleep(1000)
       val extraWorker = context.spawn(LoggerActor[String](), "extraWorker")
-      context.system.receptionist ! Receptionist.Register(serviceKey, extraWorker)
+      context.system.receptionist ! Receptionist.Register(
+        serviceKey,
+        extraWorker
+      )
       (1 to 10).foreach(i => groupRouter ! s"work task $i")
 
       /*

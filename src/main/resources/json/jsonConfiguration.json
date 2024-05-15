@@ -1,0 +1,6 @@
+{
+  "aJsonProperty": "rockthejvm",
+  "pekko": {
+    "loglevel": "DEBUG"
+  }
+}
